@@ -64,6 +64,15 @@ public class ChessPiece {
         }
         return moves;
     }
-
+    private Collection<ChessMove> kingMoves(ChessBoard board, ChessPosition myPosition) {
+        Collection<ChessMove> moves = new ArrayList<>();
+        int [][] direction = {
+                {1,0},{-1,0},{0,1},{0,-1},
+                {1,1},{-1,1},{1,-1},{-1,-1},
+        };
+        for (int[] row : direction) {
+            ChessPosition newPos
+        }
+    }
 
 }
