@@ -71,8 +71,16 @@ public class ChessPiece {
                 {1,1},{-1,1},{1,-1},{-1,-1},
         };
         for (int[] row : direction) {
-            ChessPosition newPos
+            ChessPosition newPos = position.translate(direction[0], direction[1]);
+            if (board.isValidPosition(newPos) && board.isMoveLegal(position, newPos)) {
+                moves.add(new ChessMove(position, newPos));
+            }
         }
+        return moves;
+    }
+
+    private Collection<ChessMove> queenMoves(ChessBoard board, ChessPosition position) {
+        
     }
 
 }
