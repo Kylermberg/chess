@@ -80,7 +80,19 @@ public class ChessPiece {
     }
 
     private Collection<ChessMove> queenMoves(ChessBoard board, ChessPosition position) {
-        
-    }
+        Collection<ChessMove> moves = new ArrayList<>();
+        int [][] direction = {
+                {1,0},{-1,0},{0,1},{0,-1},
+                {1,1},{-1,1},{1,-1},{-1,-1},
+        };
+        for (int[] direction : directions) {
+            ChessPosition newPos = position.translate(direction[0], direction[1]);  // Start by moving one step
+            while (board.isValidPosition(newPos) && board.isMoveLegal(position, newPos)) {
+                moves.add(new ChessMove(position, newPos));  // Add valid move
+                newPos = newPos.translate(direction[0], direction[1]);  // Move further in the same direction
+            }
+        }
 
+        return moves;
+    }
 }
