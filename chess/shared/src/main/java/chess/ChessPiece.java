@@ -71,9 +71,9 @@ public class ChessPiece {
                 {1,1},{-1,1},{1,-1},{-1,-1},
         };
         for (int[] row : direction) {
-            ChessPosition newPos = position.translate(direction[0], direction[1]);
-            if (board.isValidPosition(newPos) && board.isMoveLegal(position, newPos)) {
-                moves.add(new ChessMove(position, newPos));
+            ChessPosition newPos = myPosition.translate(direction[0], direction[1]);
+            if (board.isValidPosition(newPos) && board.isMoveLegal(myPosition, newPos)) {
+                moves.add(new ChessMove(myPosition, newPos, null));
             }
         }
         return moves;
@@ -86,9 +86,9 @@ public class ChessPiece {
                 {1,1},{-1,1},{1,-1},{-1,-1},
         };
         for (int[] direction : directions) {
-            ChessPosition newPos = position.translate(direction[0], direction[1]);  // Start by moving one step
-            while (board.isValidPosition(newPos) && board.isMoveLegal(position, newPos)) {
-                moves.add(new ChessMove(position, newPos));  // Add valid move
+            ChessPosition newPos = myPosition.translate(direction[0], direction[1]);  // Move one step in the direction
+            while (board.isValidPosition(newPos) && board.isMoveLegal(myPosition, newPos)) {
+                moves.add(new ChessMove(myPosition, newPos, null));  // Add valid move
                 newPos = newPos.translate(direction[0], direction[1]);  // Move further in the same direction
             }
         }
