@@ -58,4 +58,33 @@ Inheritance
         static variables and methods
         private methods 
 
+OBJECT OVERRIDES in the SPEC in chess-moves.md
+when you do get row do -1 from the row in the column
+chess board is (0, to 7)
+
+Day 3
+RECORDS
+Java Records 
+    POJOs are common Java classes that only exist
+    publin record Pet(...)
+records are immutable you cannot change
+automatic getters
+
+INTERFACES AND ABSTRACT CLASSES
+Exceptions
+    Abnormal conditions that can occur in Java class
+    Allow you to simplify your code
+    RuntimeException means you have a bug
+    Try/Catch Blocks
+    Catching but not resolving an exception is called swallowing an exception and is bad
+Handle or Declare Rule
+    applies to checked exceptions
+    not apply to errors or RuntimeExceptions
+    Handle: try Exception
+    Declare: throuw Exception
+Finally Blocks
+    put code that is guaranteed to be executed
+Try with Resources
+    try()
+    you can open resources in try() and they will auto-close
 
