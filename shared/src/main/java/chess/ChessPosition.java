@@ -8,23 +8,30 @@ import java.util.Objects;
  * signature of the existing methods.
  */
 public class ChessPosition {
-    private int row;    // 0-based internally
-    private int column; // 0-based internally
+    private int row;
+    private int column;
 
     public ChessPosition(int row, int col) {
-        this.row = row - 1;    // Convert from 1-based input to 0-based internally
-        this.column = col - 1; // Convert from 1-based input to 0-based internally
+        this.row = row - 1;
+        this.column = col - 1;
+    }
+
+    @Override
+    public String toString() {
+        return "ChessPosition{" +
+                "row=" + row +
+                ", column=" + column +
+                '}';
     }
 
     public int getRow() {
-        return row + 1; // Convert back to 1-based indexing
+        return row + 1;
     }
 
     public int getColumn() {
-        return column + 1; // Convert back to 1-based indexing
+        return column + 1;
     }
 
-    // Add the translate method to allow movement of the chess pieces
     public ChessPosition translate(int rowOffset, int colOffset) {
         return new ChessPosition(this.getRow() + rowOffset, this.getColumn() + colOffset);
     }

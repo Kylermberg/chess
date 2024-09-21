@@ -71,16 +71,13 @@ public class ChessGame {
         }
         Collection<ChessMove> validMoves = piece.pieceMoves(board, move.getStartPosition());
 
-        // Check if the move is valid
         if (!validMoves.contains(move)) {
             throw new InvalidMoveException("Invalid move");
         }
 
-        // Move the piece on the board
         board.addPiece(move.getEndPosition(), piece);
         board.addPiece(move.getStartPosition(), null); // Clear start position
 
-        // Switch turns after a successful move
         setTeamTurn(currentTurn == TeamColor.WHITE ? TeamColor.BLACK : TeamColor.WHITE);
     }
 
@@ -129,12 +126,12 @@ public class ChessGame {
                 tempGame.setBoard(tempBoard);
 
                 if (!tempGame.isInCheck(teamColor)) {
-                    return false; // If any move takes the king out of check, it's not checkmate
+                    return false;
                 }
             }
         }
 
-        return true; // No valid moves, it's checkmate
+        return true;
     }
 
     /**
@@ -156,7 +153,7 @@ public class ChessGame {
             }
         }
 
-        return true; // No valid moves, but the king is not in check
+        return true;
     }
 
     /**

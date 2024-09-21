@@ -20,6 +20,14 @@ public class ChessPiece {
         this.pieceType = type;
     }
 
+    @Override
+    public String toString() {
+        return "ChessPiece{" +
+                "teamColor=" + teamColor +
+                ", pieceType=" + pieceType +
+                '}';
+    }
+
     /**
      * The various different chess piece options
      */
@@ -98,7 +106,7 @@ public class ChessPiece {
         return moves;
     }
 
-    
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
