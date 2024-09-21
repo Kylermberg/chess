@@ -12,13 +12,14 @@ import java.util.Objects;
  */
 public class ChessPiece {
 
-    private ChessGame.TeamColor pieceColor;
+    private ChessGame.TeamColor teamColor;
     private ChessPiece.PieceType pieceType;
 
     public ChessPiece(ChessGame.TeamColor pieceColor, ChessPiece.PieceType type) {
-        this.pieceColor = pieceColor;
+        this.teamColor = pieceColor;
         this.pieceType = type;
     }
+
     /**
      * The various different chess piece options
      */
@@ -35,7 +36,7 @@ public class ChessPiece {
      * @return Which team this chess piece belongs to
      */
     public ChessGame.TeamColor getTeamColor() {
-        return this.pieceColor;
+        return teamColor;
     }
 
     /**
@@ -65,6 +66,7 @@ public class ChessPiece {
         }
         return moves;
     }
+
     private Collection<ChessMove> kingMoves(ChessBoard board, ChessPosition myPosition) {
         Collection<ChessMove> moves = new ArrayList<>();
         int[][] directions = {
@@ -95,21 +97,17 @@ public class ChessPiece {
         }
         return moves;
     }
+
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof ChessPiece)) return false;
-        ChessPiece piece = (ChessPiece) o;
-        return pieceColor == piece.pieceColor && pieceType == piece.pieceType;
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        ChessPiece other = (ChessPiece) obj;
+        return teamColor == other.teamColor && pieceType == other.pieceType;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(pieceColor, pieceType);
-    }
-
-    @Override
-    public String toString() {
-        return "ChessPiece{" + "color=" + pieceColor + ", type=" + pieceType + '}';
+        return Objects.hash(teamColor, pieceType);
     }
 }

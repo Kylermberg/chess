@@ -8,46 +8,38 @@ import java.util.Objects;
  * signature of the existing methods.
  */
 public class ChessPosition {
-
-    private int row;
-    private int column;
+    private int row;    // 0-based internally
+    private int column; // 0-based internally
 
     public ChessPosition(int row, int col) {
-        this.row = row;
-        this.column = col;
+        this.row = row - 1;    // Convert from 1-based input to 0-based internally
+        this.column = col - 1; // Convert from 1-based input to 0-based internally
     }
 
-    /**
-     * @return which row this position is in
-     * 1 codes for the bottom row
-     */
     public int getRow() {
-        return row;
+        return row + 1; // Convert back to 1-based indexing
     }
 
-    /**
-     * @return which column this position is in
-     * 1 codes for the left row
-     */
     public int getColumn() {
-        return column;
+        return column + 1; // Convert back to 1-based indexing
     }
+
+    // Add the translate method to allow movement of the chess pieces
     public ChessPosition translate(int rowOffset, int colOffset) {
-        return new ChessPosition(row + rowOffset, column + colOffset);
+        return new ChessPosition(this.getRow() + rowOffset, this.getColumn() + colOffset);
     }
+
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof ChessPosition)) return false;
-        ChessPosition that = (ChessPosition) o;
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        ChessPosition that = (ChessPosition) obj;
         return row == that.row && column == that.column;
     }
+
     @Override
     public int hashCode() {
-        return Objects.hash(row, column);
-    }
-    @Override
-    public String toString() {
-        return "(" + "row" + row + ", column= " + column + ")";
+        return 31 * row + column;
     }
 }
+
