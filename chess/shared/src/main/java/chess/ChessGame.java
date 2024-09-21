@@ -90,7 +90,7 @@ public class ChessGame {
      * @return True if the specified team is in check
      */
     public boolean isInCheck(TeamColor teamColor) {
-        ChessPosition kingPosition = findkingPosition(teamColor);
+        ChessPosition kingPosition = findKingPosition(teamColor);
         if (kingPosition == null) {
             return false;
         }

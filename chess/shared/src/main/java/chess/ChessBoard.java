@@ -10,6 +10,7 @@ import java.util.HashMap;
 public class ChessBoard {
 
     private Map<ChessPosition, ChessPiece> board;
+
     public ChessBoard() {
         this.board = new HashMap<>();
     }
@@ -39,6 +40,11 @@ public class ChessBoard {
      * Sets the board to the default starting board
      * (How the game of chess normally starts)
      */
+    public void setBoard(ChessBoard newBoard) {
+        this.board.clear();
+        this.board.putAll(newBoard.board);
+    }
+
     public void resetBoard() {
         board.clear();
         for (int i = 0; i < 8; i++) {
@@ -62,5 +68,31 @@ public class ChessBoard {
         addPiece(new ChessPosition(7,5), new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.BISHOP));
         addPiece(new ChessPosition(7,6), new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.KNIGHT));
         addPiece(new ChessPosition(7,7), new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.ROOK));
+    }
+    public boolean isValidPosition(ChessPosition position) {
+        return position.getRow() >= 0 && position.getRow() < 8 &&
+                position.getColumn() >= 0 && position.getColumn() < 8;
+    }
+    public boolean isMoveLegal(ChessPosition start, ChessPosition end) {
+        ChessPiece startPiece = getPiece(start);
+        ChessPiece endPiece = getPiece(end);
+
+        if (endPiece != null && endPiece.getTeamColor() == startPiece.getTeamColor()) {
+            return false;
+        }
+
+        return true;
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        ChessBoard that = (ChessBoard) obj;
+        return board.equals(that.board);
+    }
+
+    @Override
+    public int hashCode() {
+        return board.hashCode();
     }
 }
