@@ -1,4 +1,6 @@
 package chess;
+
+import java.util.Collection;
 import java.util.Map;
 import java.util.HashMap;
 /**
@@ -15,12 +17,22 @@ public class ChessBoard {
         this.board = new HashMap<>();
     }
 
+
     /**
      * Adds a chess piece to the chessboard
      *
      * @param position where to add the piece to
      * @param piece    the piece to add
      */
+
+    /**
+     * Returns all positions on the board where there are pieces.
+     * @return Collection of all positions containing pieces.
+     */
+    public Collection<ChessPosition> getAllPositions() {
+        return board.keySet();
+    }
+
     public void addPiece(ChessPosition position, ChessPiece piece) {
         board.put(position, piece);
     }
@@ -83,13 +95,17 @@ public class ChessBoard {
 
         return true;
     }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
-        ChessBoard that = (ChessBoard) obj;
-        return board.equals(that.board);
+
+        ChessBoard otherBoard = (ChessBoard) obj;
+
+        return board.equals(otherBoard.board);
     }
+
 
     @Override
     public int hashCode() {

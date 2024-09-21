@@ -1,6 +1,7 @@
 package chess;
 
 import java.util.Collection;
+import java.util.ArrayList;
 
 /**
  * For a class that can manage a chess game, making moves on a board
@@ -187,7 +188,7 @@ public class ChessGame {
     private Collection<ChessPosition> getAllTeamPieces(TeamColor teamColor) {
         Collection<ChessPosition> teamPieces = new ArrayList<>();
 
-        for (ChessPosition position : board.board.keySet()) {
+        for (ChessPosition position : board.getAllPositions()) {
             ChessPiece piece = board.getPiece(position);
             if (piece != null && piece.getTeamColor() == teamColor) {
                 teamPieces.add(position);
@@ -201,7 +202,16 @@ public class ChessGame {
      * Helper method to get all positions of the opponent's pieces
      */
     private Collection<ChessPosition> getAllOpponentPieces(TeamColor teamColor) {
-        // Implement logic to return all positions of the opponent's pieces
-        return null; // Placeholder
+        Collection<ChessPosition> opponentPieces = new ArrayList<>();
+        TeamColor opponentColor = (teamColor == TeamColor.WHITE) ? TeamColor.BLACK : TeamColor.WHITE;
+
+        for (ChessPosition position : board.getAllPositions()) {
+            ChessPiece piece = board.getPiece(position);
+            if (piece != null && piece.getTeamColor() == opponentColor) {
+                opponentPieces.add(position);
+            }
+        }
+
+        return opponentPieces;
     }
 }
