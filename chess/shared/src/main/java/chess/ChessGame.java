@@ -119,7 +119,6 @@ public class ChessGame {
             ChessPiece piece = board.getPiece(pos);
             Collection<ChessMove> moves = piece.pieceMoves(board, pos);
             for (ChessMove move : moves) {
-                // Temporarily make the move and check if it resolves the check
                 ChessBoard tempBoard = new ChessBoard();
                 tempBoard.setBoard(this.board);
                 tempBoard.addPiece(move.getEndPosition(), piece);
@@ -164,6 +163,13 @@ public class ChessGame {
      *
      * @param board the new board to use
      */
+    public void setBoard(ChessBoard board) {
+        this.board.setBoard(board);
+    }
+
+    public ChessBoard getBoard() {
+        return this.board;
+    }
 
     private ChessPosition findKingPosition(TeamColor teamColor) {
         for (ChessPosition pos : getAllTeamPieces(teamColor)) {
@@ -179,9 +185,16 @@ public class ChessGame {
      * Helper method to get all positions of a team's pieces
      */
     private Collection<ChessPosition> getAllTeamPieces(TeamColor teamColor) {
-        // Implement logic to return all positions of the specified team's pieces
-        // This will depend on how you've implemented the ChessBoard class
-        return null; // Placeholder
+        Collection<ChessPosition> teamPieces = new ArrayList<>();
+
+        for (ChessPosition position : board.board.keySet()) {
+            ChessPiece piece = board.getPiece(position);
+            if (piece != null && piece.getTeamColor() == teamColor) {
+                teamPieces.add(position);
+            }
+        }
+
+        return teamPieces;
     }
 
     /**
@@ -190,18 +203,5 @@ public class ChessGame {
     private Collection<ChessPosition> getAllOpponentPieces(TeamColor teamColor) {
         // Implement logic to return all positions of the opponent's pieces
         return null; // Placeholder
-    }
-
-    public void setBoard(ChessBoard board) {
-        this.board = board;
-    }
-
-    /**
-     * Gets the current chessboard
-     *
-     * @return the chessboard
-     */
-    public ChessBoard getBoard() {
-        return this.board;
     }
 }
